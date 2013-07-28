@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+	<! gnw >
+	<head>
+		<title>your pie</title>
+
+		<! js stuff >
+		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+		<! css styling>
+		<style>
+			div.result
+			{
+				margin-left: auto;
+				margin-right: auto;
+				width: 67%;
+				padding: 10px;
+				border: 2px solid black;
+				background: white;
+				text-align: center;
+			}
+			div.gen
+			{
+			}
+			div.pie
+			{
+				margin-left: auto;
+				margin-right: auto;
+				width: 200px;
+				height: 220px;
+			}
+			div.textbody
+			{
+				text-align: left;
+			}
+		</style>
+	</head>
+
+	<body bgcolor="#eeeeee">
+
+		<br><br><br>
+		<font face="Palatino Linotype">
+			<div class="result">
+				<font size=4>your pie:</font>
+				<br><br>
+				<div class="gen" id="gen">
+					<div class="pie" id="ennui_pie"></div>
+				</div>
+				<div class="textbody">
+					<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. 
+					<br><br>Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. 
+					<br><br>Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. Proin quam. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit. Sed lectus.  
+				</div>
+			</div>
+		</font>
+
+		<! js script in body to ensure everything exists >
+		<script type="text/javascript">
+
+			// Constants for formatting etc.
+			var max = 1;
+			var side = 200;
+			var angles = [];
+			var radius = side/2*0.9;
+			var lastAngle = -Math.PI/2;
+			var query = window.location.search.substring(1).split('&');
+			var pieData = { "a":1, "b":1, "c":1, "d":1, "e":1, "f":1 };
+			var colors = [ "#ff0000", "#ff6600", "#fefe00", "#008000", "#3366ff", "#993265" ];
+
+			// Given arc angle, radius, and starting angle, return arc path
+			function arcPath (a, r, s) {
+				    var half = side/2;
+				        return "M" + half + "," + half +
+					        " L" + (Math.cos(s)*r+half) + "," + (Math.sin(s)*r+half) +
+						        " A" + r + "," + r + " 0 0,1" + " " +
+							        (Math.cos(s+a)*r+half) + "," + (Math.sin(s+a)*r+half);
+							}
+
+							// Parse query string
+							for (var term in query) {
+								    pieData[(query[term].split('='))[0]] = parseInt((query[term].split('='))[1]);
+							    }
+
+							    // Do the math to figure out angles in radians
+							    var sum = pieData["a"]+pieData["b"]+pieData["c"]+pieData["d"]+pieData["e"]+pieData["f"];
+							    for (var i in pieData) {
+								        angles.push(pieData[i]*2*Math.PI/sum);
+								}
+
+								// Acquire graphics lock
+								var svg = d3.select("#ennui_pie")
+								            .append("svg")
+									                .attr("width", side)
+											            .attr("height", side);
+												                
+												    // Draw the slices
+												    for (var i in angles) {
+													        svg.append("path")
+														       .attr("d", arcPath (angles[i], radius, (lastAngle%(2*Math.PI))))
+														              .attr("stroke", "black")
+															             .attr("stroke-width", 1)
+																            .attr("fill", function () { return colors[i]; });
+																	        lastAngle += angles[i];
+																	}
+
+																	if (sum < 11) {
+																		    d3.select("#gen").append("i").text("No ennui for you this week!");  
+																		    } else if (sum > 24) {
+																		        d3.select("#gen").append("b").text("Even though your pie might look balenced, you might have a lot of ennui...");
+																		}
+
+																	</script>
+
+
+																	<script>
+																		  window.fbAsyncInit = function() {
+																			      // init the FB JS SDK
+																			          FB.init({
+																					        appId      : 'YOUR_APP_ID',                        // App ID from the app dashboard
+																						      channelUrl : '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel file for x-domain comms
+																						            status     : true,                                 // Check Facebook Login status
+																							          xfbml      : true                                  // Look for social plugins on the page
+																								      });
+
+																								          // Additional initialization code such as adding Event Listeners goes here
+																									    };
+
+																									      // Load the SDK asynchronously
+																									        (function(d, s, id){
+																											     var js, fjs = d.getElementsByTagName(s)[0];
+																											          if (d.getElementById(id)) {return;}
+																												       js = d.createElement(s); js.id = id;
+																												            js.src = "//connect.facebook.net/en_US/all.js";
+																													         fjs.parentNode.insertBefore(js, fjs);
+																														    }(document, 'script', 'facebook-jssdk'));
+																													    </script>
+
+
+
+																													    <br><br><br>
+
+																												    </body>
+																											    </html>
