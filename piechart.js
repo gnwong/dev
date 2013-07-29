@@ -11,13 +11,11 @@
  * E: 28.7.2013
  */
 
- 
 function writeHello() {
-
-    document.write("<h1>HELLO</h1>");
-    
+document.write("Hello world!4");
 }
- 
+
+/*
 function myFunction() {
 
     // Constants for formatting etc.
@@ -73,3 +71,4 @@ function myFunction() {
     }
 
 }
+*/
