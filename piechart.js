@@ -12,7 +12,7 @@
  */
 
 function writeHello() {
-document.write("Hello world!4");
+document.write("Hello world! AAA");
 }
 
 /*
