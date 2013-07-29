@@ -11,12 +11,7 @@
  * E: 28.7.2013
  */
 
-function writeHello() {
-document.write("Hello world! AAA");
-}
-
-/*
-function myFunction() {
+function drawPie() {
 
     // Constants for formatting etc.
     var max = 1;
@@ -71,4 +66,3 @@ function myFunction() {
     }
 
 }
-*/
