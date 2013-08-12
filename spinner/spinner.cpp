@@ -89,7 +89,7 @@ int main (int argc, char **argv) {
   PIDs.push_back (pid);
   if (pid == 0) {
     while (true) {
-      //mem_leak (10); // create a memory leak for 5 seconds
+      mem_leak (10); // create a memory leak for 5 seconds
       sleep (rand() % sleep_times[2]);
     }
   }
