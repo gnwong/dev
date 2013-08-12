@@ -72,11 +72,11 @@ int main (int argc, char **argv) {
     process (rand() % 80+10, sleep_times[0]);
   }
   
-  /* Set up CPU resource eater */
-  pid = fork();
-  PIDs.push_back (pid);
-  if (pid == 0) {
-    for (size_t j=0; j<5; j++) {
+  for (size_t j=0; j<5; j++) {
+    /* Set up CPU resource eater */
+    pid = fork();
+    PIDs.push_back (pid);
+    if (pid == 0) {
       while (true) {
         cpu_collatz ((rand()%70)+25);
         sleep (rand() % sleep_times[1]);
