@@ -26,6 +26,7 @@ void mem_eat ();
 void mem_leak (time_t delay);
 void timer (time_t t);
 void sig_handler (int s);
+void sig_term (int s);
 void cpu_collatz (double amount);
 void mem_fail (int_fast8_t percent);
 void mutex_threads (size_t number, size_t depth);
@@ -41,11 +42,13 @@ int mutex_depth = 0;
  */
 int main (int argc, char **argv) {
 
+	time_t runtime = 3600; // in seconds
+
+	if (VERBOSE) std::cout << "Main program pid " << getpid() << std::endl;
+
   /* Set up signal handling */
   signal (SIGINT, sig_handler);
-  //signal (SIGTERM, sig_handler);
   signal (SIGQUIT, sig_handler);
-
 
   // 0:processes, 1:collatz, 2:mem leak, 3:massive mem, 4: malloc fail
   //    5: threads, 6: true memory leak
@@ -60,8 +63,9 @@ int main (int argc, char **argv) {
   /* Set up overall timer */
   pid = fork();
   PIDs.push_back (pid);
+	time_t zeit = time (NULL);
   if (pid == 0) {
-    timer (3600);
+    timer (runtime);
     goto end;
   }
   
@@ -70,6 +74,7 @@ int main (int argc, char **argv) {
   PIDs.push_back (pid);
   if (pid == 0) {
     process (rand() % 80+10, sleep_times[0]);
+		return 0;
   }
   
   for (size_t j=0; j<5; j++) {
@@ -129,13 +134,18 @@ int main (int argc, char **argv) {
   PIDs.push_back (pid);
   if (pid == 0) {
     while (true) {
-    //  mem_leak_true (sleep_times[6]);
+      mem_leak_true (sleep_times[6]);
       sleep (rand() % sleep_times[6]);
       break;
     }
   }
 
-  /* the end... */
+ 	while (time (NULL) - zeit < runtime) {
+		sleep (10);
+	} 
+	return 0;
+
+	/* the end... */
   end:
 
   /* Wait for timer */
@@ -145,6 +155,7 @@ int main (int argc, char **argv) {
   waitpid (PIDs.at(0), NULL, 0);
   
   /* Worst case... kill everything */
+	std::cout << "Terminating normally." << std::endl;
   kill (0, SIGTERM);
 
   return 0;
@@ -342,5 +353,5 @@ void sig_handler (int s) {
  *  Simple process that sleeps
  */
 void timer (time_t t) {
-  sleep (t);
+	sleep (t);
 }
