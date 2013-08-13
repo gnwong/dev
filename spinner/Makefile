@@ -1,6 +1,6 @@
 
 CC=g++
-SRC=spinner.cpp
+SRC=spinner.cc
 LD=
 
 all:

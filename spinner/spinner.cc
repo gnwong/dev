@@ -1,8 +1,19 @@
+#include <string>
 #include <iostream>
+#include <unistd.h>
+#include <cstring>
+#include <signal.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
+#include <sstream>
 #include <math.h>
 #include <vector>
 #include <signal.h>
 #include <pthread.h>
+#include <cstdlib>
+#include <stdlib.h>
+#include <stdio.h>
 
 bool VERBOSE = true;
 
@@ -15,28 +26,29 @@ void mem_eat ();
 void mem_leak (time_t delay);
 void timer (time_t t);
 void sig_handler (int s);
+void sig_term (int s);
 void cpu_collatz (double amount);
 void mem_fail (int_fast8_t percent);
 void mutex_threads (size_t number, size_t depth);
 void *mutex_run (void *arg);
-
 
 // Globals for the threads
 pthread_mutex_t m[100];
 int clef = 0;
 int mutex_depth = 0;
 
-
 /*
  * main loop 
  */
 int main (int argc, char **argv) {
 
+	time_t runtime = 3600; // in seconds
+
+	if (VERBOSE) std::cout << "Main program pid " << getpid() << std::endl;
+
   /* Set up signal handling */
   signal (SIGINT, sig_handler);
-  //signal (SIGTERM, sig_handler);
   signal (SIGQUIT, sig_handler);
-
 
   // 0:processes, 1:collatz, 2:mem leak, 3:massive mem, 4: malloc fail
   //    5: threads, 6: true memory leak
@@ -51,8 +63,9 @@ int main (int argc, char **argv) {
   /* Set up overall timer */
   pid = fork();
   PIDs.push_back (pid);
+	time_t zeit = time (NULL);
   if (pid == 0) {
-    timer (100);
+    timer (runtime);
     goto end;
   }
   
@@ -61,15 +74,18 @@ int main (int argc, char **argv) {
   PIDs.push_back (pid);
   if (pid == 0) {
     process (rand() % 80+10, sleep_times[0]);
+		return 0;
   }
   
-  /* Set up CPU resource eater */
-  pid = fork();
-  PIDs.push_back (pid);
-  if (pid == 0) {
-    while (true) {
-      cpu_collatz (100);
-      sleep (rand() % sleep_times[1]);
+  for (size_t j=0; j<5; j++) {
+    /* Set up CPU resource eater */
+    pid = fork();
+    PIDs.push_back (pid);
+    if (pid == 0) {
+      while (true) {
+        cpu_collatz ((rand()%70)+25);
+        sleep (rand() % sleep_times[1]);
+      }
     }
   }
   
@@ -78,7 +94,7 @@ int main (int argc, char **argv) {
   PIDs.push_back (pid);
   if (pid == 0) {
     while (true) {
-      //mem_leak (10); // create a memory leak for 5 seconds
+      mem_leak (10); // create a memory leak for 5 seconds
       sleep (rand() % sleep_times[2]);
     }
   }
@@ -124,7 +140,12 @@ int main (int argc, char **argv) {
     }
   }
 
-  /* the end... */
+ 	while (time (NULL) - zeit < runtime) {
+		sleep (10);
+	} 
+	return 0;
+
+	/* the end... */
   end:
 
   /* Wait for timer */
@@ -134,6 +155,7 @@ int main (int argc, char **argv) {
   waitpid (PIDs.at(0), NULL, 0);
   
   /* Worst case... kill everything */
+	std::cout << "Terminating normally." << std::endl;
   kill (0, SIGTERM);
 
   return 0;
@@ -331,5 +353,5 @@ void sig_handler (int s) {
  *  Simple process that sleeps
  */
 void timer (time_t t) {
-  sleep (t);
+	sleep (t);
 }
