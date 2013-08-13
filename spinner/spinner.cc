@@ -80,7 +80,7 @@ int main (int argc, char **argv) {
   PIDs.push_back (pid);
   if (pid == 0) {
     process (rand() % 80+10, sleep_times[0]);
-		return 0;
+		exit (0);
   }
   
   for (size_t j=0; j<5; j++) {
@@ -314,11 +314,14 @@ void process (size_t amount, time_t delay) {
     if (fork() == 0) {
       if (VERBOSE) std::cout << getpid() << ":" << /* thread << */
             " Spawned simple filler process" << std::endl;
-       while (true) {
-        cpu_collatz (1);
-        sleep (rand() % delay);
+      while (true) {
+        if (fork() == 0) {
+          cpu_collatz (1);
+          exit (0);
+        } else {
+          sleep (rand() % delay);
+        }
       }
-      break;
     }
   }
 }
@@ -344,7 +347,7 @@ void cpu_collatz (double amount) {
     }
   }
   sleep (1);  // Simulate lull in computation
-
+  exit (1);
 }
 
 /*
