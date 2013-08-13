@@ -42,7 +42,13 @@ int mutex_depth = 0;
  */
 int main (int argc, char **argv) {
 
-	time_t runtime = 3600; // in seconds
+  time_t runtime = 3600; // in seconds
+
+  if (argc > 1) {
+    std::cout << "Running for " << argv[1] << " seconds." << std::endl;
+    runtime = atoi (argv[1]);
+  }
+
 
 	if (VERBOSE) std::cout << "Main program pid " << getpid() << std::endl;
 
