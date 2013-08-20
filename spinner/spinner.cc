@@ -1,8 +1,44 @@
-#include <iostream>
+/*
+ *
+ * #include <iostream>
 #include <math.h>
 #include <vector>
 #include <signal.h>
 #include <pthread.h>
+#include <stdlib.h>
+#include <cstdlib.h>
+#include <string>
+#include <unistd.h>
+#include <cstring>
+#include <stdio.h>
+#include <cstdlib>
+
+
+///////
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdio.h>
+#include <stdio.h>
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/mman.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+*/
+
+#include <stdlib.h>
+#include <cstdlib>
+
 
 bool VERBOSE = true;
 
