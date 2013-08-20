@@ -3,7 +3,7 @@
 #
 # 16 AUG 2013
 #
-# curl https://raw.github.com/wong1275/dev/master/home/setup | bash
+# bash <(curl -s https://raw.github.com/wong1275/dev/master/home/setup)
 #
 
 # vim setup
