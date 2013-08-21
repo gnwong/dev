@@ -50,7 +50,7 @@ NC="\e[m"               # Color Reset
 
 # Test for user type (for proper color assignment)
 if [[ ${USER} == "root" ]]; then
-  SU="${Red}\u${NC}"
+  SU="\[${Red}\]\u\[${NC}\]"
 elif [[ ${USER} != $(logname) ]]; then
   SU="\[${Red}\]\u\[${NC}\]"
 else
@@ -59,7 +59,10 @@ fi
 
 
 # Standard prompt
-export PS1="${SU}\[${White}\]@\[${Green}\]\h\[${NC}\] \[${BBlue}\]\w\[${White}\] $ "
+export PS1="\[${SU}\]\[${White}\]@\[${Green}\]\h\[${NC}\] \[${BBlue}\]\w\[${White}\] $ "
+
+
+export TERM=xterm-color
 
 #
 # Alias
