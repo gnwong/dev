@@ -68,6 +68,7 @@ export TERM=xterm-color
 # Alias
 #
 alias q="exit"
+alias cls='echo -e "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"'
 
 # Insert above this line. Below code (should be) is deprecated
 
