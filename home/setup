@@ -6,6 +6,8 @@
 # bash <(curl -s https://raw.github.com/wong1275/dev/master/home/setup)
 #
 
+startdir=${PWD}
+
 # vim setup
 cd ~
 if [ -f ~/.vimrc ]; then
@@ -35,3 +37,6 @@ mkdir -p opt
 cd opt
 mkdir -p tools
 cd tools
+
+# cleanup
+cd $startdir
