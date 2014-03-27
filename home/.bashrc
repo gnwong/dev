@@ -46,7 +46,7 @@ RV="\[${White}\]\$? \$(if [[ \$? -ne 0 ]]; then echo \"\[${Red}\]error \"; fi)"
 SU="\$(if [[ \${USER} == \"root\" ]]; then echo \"\[${Red}\]\u\[${NC}\]\"; else echo \"\[${Cyan}\]\u\[${NC}\]\"; fi)\[${White}\]"
 
 ### Define the prompt and term
-export PS1="\[${Purple}\] ~~~ \[${White}\][ ${RV}\[${White}\]] ${SU}@\[${BGreen}\]\h\[${NC}\] \[${Yellow}\]\w\[${White}\] \n$ "
+export PS1="\[${Purple}\] ~~~ \[${White}\][ ${RV}\[${White}\]] ${SU}@\[${Green}\]\h\[${NC}\] \[${Yellow}\]\w\[${White}\] \n$ "
 
 ### Handle Darwin vs Linux environments
 if [[ $(uname) == "Darwin" ]]; then
