@@ -1,0 +1,35 @@
+# Sets up environment
+# from GitHub
+#
+# 27 March 2014
+#
+# bash <(curl -s https://raw.github.com/wong1275/dev/master/home/setup_min)
+#
+
+startdir=${PWD}
+
+# Setup / configure vim
+cd ~
+if [ -f ~/.vimrc ]; then
+  cp .vimrc .vimrc_backup
+fi
+curl https://raw.github.com/wong1275/dev/master/home/.vimrc > .vimrc
+mkdir -p .vim
+cd .vim
+mkdir -p colors
+cd colors
+curl https://raw.github.com/wong1275/dev/master/home/.vim/colors/candycode.vim > candycode.vim
+
+# Setup / configure bash
+cd ~
+if [ -f ~/.bashrc ]; then
+  cp .bashrc .bashrc_backup
+fi
+curl https://raw.github.com/wong1275/dev/master/home/.bashrc > .bashrc
+if [ -f ~/.bash_profile ]; then
+  cp .bash_profile .bash_profile_backup
+fi
+curl https://raw.github.com/wong1275/dev/master/home/.bash_profile > .bash_profile
+
+# cleanup
+cd $startdir
