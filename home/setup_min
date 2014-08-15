@@ -2,8 +2,9 @@
 # from GitHub
 #
 # 27 March 2014
+# 14 August 2014
 #
-# bash <(curl -s https://raw.github.com/wong1275/dev/master/home/setup_min)
+# bash <(curl -s https://raw.githubusercontent.com/gnwong/dev/master/home/setup_min)
 #
 
 startdir=${PWD}
@@ -13,23 +14,23 @@ cd ~
 if [ -f ~/.vimrc ]; then
   cp .vimrc .vimrc_backup
 fi
-curl https://raw.github.com/wong1275/dev/master/home/.vimrc > .vimrc
+curl https://raw.githubusercontent.com/gnwong/dev/master/home/.vimrc > .vimrc
 mkdir -p .vim
 cd .vim
 mkdir -p colors
 cd colors
-curl https://raw.github.com/wong1275/dev/master/home/.vim/colors/candycode.vim > candycode.vim
+curl https://raw.githubusercontent.com/gnwong/dev/master/home/.vim/colors/candycode.vim > candycode.vim
 
-# Setup / configure bash
+# Setup / configure bash.
 cd ~
 if [ -f ~/.bashrc ]; then
   cp .bashrc .bashrc_backup
 fi
-curl https://raw.github.com/wong1275/dev/master/home/.bashrc > .bashrc
+curl https://raw.githubusercontent.com/gnwong/dev/master/home/.bashrc > .bashrc
 if [ -f ~/.bash_profile ]; then
   cp .bash_profile .bash_profile_backup
 fi
-curl https://raw.github.com/wong1275/dev/master/home/.bash_profile > .bash_profile
+curl https://raw.githubusercontent.com/gnwong/dev/master/home/.bash_profile > .bash_profile
 
-# cleanup
+# Clean things up.
 cd $startdir
