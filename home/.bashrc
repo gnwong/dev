@@ -1,8 +1,8 @@
 #
 #   .bashrc 
 #
-#     CREATED:  17 JULY 2013
-#     UPDATED:  27 MARCH 2014
+#     CREATED:  17 JUL 2013
+#     UPDATED:  16 MAR 2016
 #     AUTHOR:   George Wong
 
 ### If not running interactively, don't do anything
@@ -62,16 +62,18 @@ fi
 alias q="exit"
 alias l="ls -l"
 alias la="ls -la"
+alias listsize="du -s * | sort -nr | awk '{print \$2}' | xargs du -sh"
 alias cls='echo -e "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"'
 
 ### Configuration
-shopt -s histappend     #append to history
-shopt -s checkwinsize   #properly adjust size of window if necessary
+shopt -s histappend     # Append to history
+shopt -s checkwinsize   # Properly adjust size of window if necessary
 export TERM=xterm-color
 
 ### Please don't make changes below this line.
-export FBROOT=/Users/gwong/Desktop/fastbit-ibis1.3.7/src
 export PATH=/opt/tools/local/bin:$PATH
 if [ -f /opt/tools/env.sh ]; then
   source /opt/tools/env.sh
 fi
+
+
