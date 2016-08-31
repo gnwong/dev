@@ -1,0 +1,47 @@
+##########################################
+##  
+##  setupmin
+##
+##    Sets up LaTeX homework environment
+##    from GitHub.
+##
+##  Created        31-08-16  by  GNW
+##  Last Modified  31-08-16  by  GNW
+##
+##  Run as
+##  $ bash <(curl -s https://raw.githubusercontent.com/gnwong/dev/master/LaTeX/ps/setupmin)
+##
+##########################################
+
+# Create src directory
+if [ -d src ]; then
+  mkdir -p backup/src
+  cp src/* backup/src/ 2> /dev/null
+  echo "'src' directory exists ... contents copied to 'backup'"
+else
+  mkdir src
+fi
+
+# Create pdf directory
+if [ -d pdf ]; then
+  mkdir -p backup/pdf
+  cp pdf/* backup/pdf/ 2> /dev/null
+  echo "'pdf' directory exists ... contents copied to 'backup'"
+else
+  mkdir pdf
+fi
+
+# Download template file
+curl https://raw.githubusercontent.com/gnwong/dev/master/LaTeX/ps/template.tex > src/template.tex
+
+# Download Makefile
+if [ -f Makefile ]; then
+  mkdir -p backup
+  cp Makefile backup/
+  echo "Makefile exists ... copied to 'backup'"
+fi
+curl https://raw.githubusercontent.com/gnwong/dev/master/LaTeX/ps/Makefile > Makefile
+
+# Overwrite course title and author
+echo "~~~~~~~~~~~"
+make setup
