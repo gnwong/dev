@@ -32,7 +32,7 @@ else
 fi
 
 # Download template file
-curl https://raw.githubusercontent.com/gnwong/dev/master/LaTeX/ps/template.tex > src/template.tex
+curl https://raw.githubusercontent.com/gnwong/dev/master/LaTeX/ps/src/template.tex > src/template.tex
 
 # Download Makefile
 if [ -f Makefile ]; then
