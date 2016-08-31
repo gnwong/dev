@@ -16,9 +16,9 @@ all:
 
 setup:
 	@read -p "Enter Course Name: " course; \
-	sed -i -e "s/COURSE/$$course/g" src/template.tex
+	sed -i '' -e "s/COURSE/$$course/g" src/template.tex
 	@read -p "Enter Your Name: " aname; \
-	sed -i -e "s/AUTHOR/$$aname/g" src/template.tex
+	sed -i '' -e "s/AUTHOR/$$aname/g" src/template.tex
 
 clean:
 	@-rm *.aux *.log *.gz
