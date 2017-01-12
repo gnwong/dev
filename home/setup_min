@@ -1,8 +1,8 @@
 # Sets up environment
 # from GitHub
 #
-# 27 March 2014
-# 14 August 2014
+# 27 Mar 2014
+# 12 Jan 2018
 #
 # bash <(curl -s https://raw.githubusercontent.com/gnwong/dev/master/home/setup_min)
 #
@@ -34,3 +34,5 @@ curl https://raw.githubusercontent.com/gnwong/dev/master/home/.bash_profile > .b
 
 # Clean things up.
 cd $startdir
+source ~/.bashrc
+
