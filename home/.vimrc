@@ -16,6 +16,7 @@ set modeline                      " Allow per file config
 set expandtab
 set ruler
 set background=dark
+set autoindent
 colorscheme candycode
 command W w!
 command Wq wq!
